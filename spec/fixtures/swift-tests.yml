@@ -18,3 +18,4 @@ global_secrets:
 - SecretWithDollarSignNotEscapedAndDoubleQuotesKey
 - SecretWithDollarSignNotEscapedAndNoQuotesKey
 - SecretWithWeirdCharactersKey
+global_Info: 

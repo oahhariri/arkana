@@ -12,6 +12,7 @@ RSpec.describe Config do
         expect(subject.environments).to be_empty
         expect(subject.environment_secrets).to be_empty
         expect(subject.global_secrets).to be_empty
+        expect(subject.global_Info).to be_empty
         default_name = "ArkanaKeys"
         expect(subject.namespace).to eq default_name
         expect(subject.import_name).to eq default_name
@@ -31,6 +32,7 @@ RSpec.describe Config do
         expect(subject.environments).to eq %w[Debug Release DebugPlusMore ReleasePlusMore]
         expect(subject.environment_secrets).to eq %w[ServiceKey Server]
         expect(subject.global_secrets).to eq %w[Domain Global]
+        expect(subject.global_Info).to eq %w[Test]
         custom_name = "MySecrets"
         expect(subject.namespace).to eq custom_name
         expect(subject.import_name).to eq custom_name
@@ -88,12 +90,12 @@ RSpec.describe Config do
     end
 
     it "should contain the contents of the global keys + environment keys" do
-      expect(subject.all_keys).to eq(subject.global_secrets + subject.environment_keys)
+      expect(subject.all_keys).to eq(subject.global_secrets + subject.environment_keys + subject.global_Info)
     end
 
     describe "#count" do
       it "should match the number of environments times the number of environment secrets, plus the number of global secrets" do
-        expect(subject.all_keys.count).to eq((subject.environments.count * subject.environment_secrets.count) + subject.global_secrets.count)
+        expect(subject.all_keys.count).to eq((subject.environments.count * subject.environment_secrets.count) + subject.global_secrets.count + subject.global_Info.count)
       end
     end
   end

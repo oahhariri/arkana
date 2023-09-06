@@ -5,7 +5,7 @@ require "arkana/models/secret"
 # A class that defines template arguments in a language-agnostic form.
 class TemplateArguments
   # Generates template arguments for the given secrets and config specifications.
-  def initialize(environment_secrets:, global_secrets:, config:, salt:)
+  def initialize(environment_secrets:, global_secrets:, global_Info:, config:, salt:)
     # The environments declared in the config file.
     @environments = config.environments
     # The salt used to encode all the secrets.
@@ -14,6 +14,8 @@ class TemplateArguments
     @environment_secrets = environment_secrets
     # The encoded global secrets.
     @global_secrets = global_secrets
+     # The encoded global secrets.
+    @global_Info = global_Info
     # Name of the import statements (or the interfaces' prefixes).
     @import_name = config.import_name
     # Name of the pod that should be generated.

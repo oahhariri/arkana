@@ -19,3 +19,4 @@ global_secrets:
 environment_secrets:
   - ServiceKey
   - Server
+  global_Info: 
