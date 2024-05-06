@@ -3,6 +3,8 @@
 RSpec.describe SwiftCodeGenerator do
   let(:config) { Config.new(YAML.load_file("spec/fixtures/arkana-fixture.yml")) }
   let(:salt) { SaltGenerator.generate }
+
+  
   let(:environment_secrets) do
     Encoder.encode!(
       keys: config.environment_keys,
@@ -21,10 +23,19 @@ RSpec.describe SwiftCodeGenerator do
     )
   end
 
+  let(:global_Info) do
+    Encoder.encodeNo!(
+      keys: config.global_Info, 
+      current_flavor: config.current_flavor,
+      environments: config.environments,
+    )
+  end
+
   let(:template_arguments) do
     TemplateArguments.new(
       environment_secrets: environment_secrets,
       global_secrets: global_secrets,
+      global_Info: global_Info,
       config: config,
       salt: salt,
     )

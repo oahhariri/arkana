@@ -5,6 +5,7 @@ RSpec.describe TemplateArguments do
     described_class.new(
       environment_secrets: environment_secrets,
       global_secrets: global_secrets,
+      global_Info: global_Info,
       config: config,
       salt: salt,
     )
@@ -29,6 +30,14 @@ RSpec.describe TemplateArguments do
       environments: config.environments,
     )
   end
+ 
+  let(:global_Info) do
+    Encoder.encodeNo!(
+      keys: config.global_Info, 
+      current_flavor: config.current_flavor,
+      environments: config.environments,
+    )
+  end
 
   before do
     config.all_keys.each do |key|
@@ -42,6 +51,7 @@ RSpec.describe TemplateArguments do
       expect(subject.instance_variable_get(:@salt)).to eq salt
       expect(subject.instance_variable_get(:@environment_secrets)).to eq environment_secrets
       expect(subject.instance_variable_get(:@global_secrets)).to eq global_secrets
+      expect(subject.instance_variable_get(:@global_Info)).to eq config.global_Info
       expect(subject.instance_variable_get(:@import_name)).to eq config.import_name
       expect(subject.instance_variable_get(:@pod_name)).to eq config.pod_name
       expect(subject.instance_variable_get(:@namespace)).to eq config.namespace

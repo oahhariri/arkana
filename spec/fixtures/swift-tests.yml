@@ -33,3 +33,6 @@ environments:
 environment_secrets:
   - ServiceKey
   - Server
+
+global_Info: 
+

@@ -22,3 +22,4 @@ global_secrets: # Optional. List of secrets that are the same regardless of whic
   - BackendDomain
 environment_secrets: # Optional. This will create a secret for each entry in this list, one for each env, appending a suffix corresponding to the name of the env. Defaults to empty.
   - MyServiceAPIKey # Will lookup for MyServiceAPIKeyDebug and MyServiceAPIKeyRelease env vars (assuming no flavor was declared)
+global_Info :
