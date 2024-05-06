@@ -18,6 +18,17 @@ module Encoder
     end
   end
 
+
+  def self.encodeNo!(keys:, current_flavor:, environments:)
+    keys.map do |key|
+      secret = find_secret!(key: key, current_flavor: current_flavor)
+      encoded_value = secret
+      secret_type = Type.new(string_value: secret)
+      protocol_key = protocol_key(key: key, environments: environments)
+      Secret.new(key: key, protocol_key: protocol_key, encoded_value: encoded_value, type: secret_type)
+    end
+  end
+
   # Encodes the given string, using the given cipher.
   def self.encode(string, cipher)
     bytes = string.encode("utf-8")

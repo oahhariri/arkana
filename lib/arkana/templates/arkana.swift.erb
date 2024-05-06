@@ -54,6 +54,22 @@ public extension <%= @namespace %> {
 <% end %>
     }
 }
+ 
+
+public extension <%= @namespace %> {
+    struct Info: <%= @namespace %>InfoProtocol {
+        public init() {}
+        <% for secret in @global_Info %>
+
+        @inline(__always)
+        public <%= @swift_declaration_strategy %> <%= secret.key.camel_case %>: <%= SwiftTemplateHelper.swift_type(secret.type) %> = {
+            
+            return "<%= secret.encoded_value %>"
+        }()
+<% end %>
+    }
+}
+
 
 <% for environment in @environments %>
 public extension <%= @namespace %> {

@@ -16,3 +16,10 @@ public protocol <%= @namespace %>EnvironmentProtocol {
     var <%= secret.protocol_key.camel_case %>: <%= SwiftTemplateHelper.swift_type(secret.type) %> { <%= SwiftTemplateHelper.protocol_getter(@swift_declaration_strategy) %> }
 <% end %>
 }
+
+
+public protocol <%= @namespace %>InfoProtocol { 
+<% for secret in @global_Info %>
+    var <%= secret.protocol_key.camel_case %>: <%= SwiftTemplateHelper.swift_type(secret.type) %> { <%= SwiftTemplateHelper.protocol_getter(@swift_declaration_strategy) %> }
+<% end %>
+}

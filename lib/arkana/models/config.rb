@@ -8,6 +8,8 @@ class Config
   attr_reader :global_secrets
   # @returns [string[]]
   attr_reader :environment_secrets
+ # @returns [string[]]
+  attr_reader :global_Info
   # @returns [string]
   attr_reader :import_name
   # @returns [string]
@@ -36,6 +38,7 @@ class Config
   def initialize(yaml)
     @environments = (yaml["environments"] || []).map(&:capitalize_first_letter)
     @environment_secrets = yaml["environment_secrets"] || []
+    @global_Info = yaml["global_Info"] || []
     @global_secrets = yaml["global_secrets"] || []
     default_name = "ArkanaKeys"
     @namespace = yaml["namespace"] || default_name
@@ -61,6 +64,6 @@ class Config
   end
 
   def all_keys
-    global_secrets + environment_keys
+    global_secrets + environment_keys + global_Info
   end
 end

@@ -28,7 +28,14 @@ module Arkana
         current_flavor: config.current_flavor,
         environments: config.environments,
       )
-    rescue StandardError => e
+
+      global_Info = Encoder.encodeNo!(
+        keys: config.global_Info, 
+        current_flavor: config.current_flavor,
+        environments: config.environments,
+      )
+
+  rescue StandardError => e
       # TODO: Improve this by creating an Env/Debug helper
       puts("Something went wrong when parsing and encoding your secrets.")
       puts("Current Flavor: #{config.current_flavor}")
@@ -39,6 +46,7 @@ module Arkana
     template_arguments = TemplateArguments.new(
       environment_secrets: environment_secrets,
       global_secrets: global_secrets,
+      global_Info: global_Info,
       config: config,
       salt: salt,
     )
